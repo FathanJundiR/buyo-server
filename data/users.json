@@ -1,0 +1,26 @@
+[
+  {
+    "fullName": "mamang",
+    "password": "12345",
+    "email": "mamang@mail.com",
+    "address": "Tangerang",
+    "phoneNumber": "08213453",
+    "role": "admin"
+  },
+  {
+    "fullName": "ucup",
+    "password": "12345",
+    "email": "ucup@mail.com",
+    "address": "Tangerang",
+    "phoneNumber": "0856473",
+    "role": "staff"
+  },
+  {
+    "fullName": "ipin",
+    "password": "12345",
+    "email": "ipin@mail.com",
+    "address": "Tangerang",
+    "phoneNumber": "0856473",
+    "role": "buyer"
+  }
+]
