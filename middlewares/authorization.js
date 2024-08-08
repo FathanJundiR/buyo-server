@@ -1,6 +1,6 @@
-const { User, Article } = require("../models");
+const { User, Laptop } = require("../models");
 
-async function articleAuthorization(req, res, next) {
+async function laptopAuthorization(req, res, next) {
   try {
     const { userId, role } = req.logInfo;
 
@@ -12,14 +12,10 @@ async function articleAuthorization(req, res, next) {
       }
 
       const { id } = req.params;
-      const article = await Article.findByPk(id);
+      const laptop = await Laptop.findByPk(id);
 
-      if (!article) {
+      if (!laptop) {
         throw { name: "NotFound", id };
-      }
-
-      if (article.authorId !== user.id) {
-        throw { name: "Forbidden" };
       }
     }
 
@@ -39,4 +35,4 @@ function adminAuthorization(req, res, next) {
   }
 }
 
-module.exports = { articleAuthorization, adminAuthorization };
+module.exports = { laptopAuthorization, adminAuthorization };

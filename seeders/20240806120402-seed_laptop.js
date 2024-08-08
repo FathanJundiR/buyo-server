@@ -5,7 +5,7 @@ module.exports = {
   async up(queryInterface, Sequelize) {
     const laptops = require("../data/laptops.json");
     laptops.forEach((laptop) => {
-      laptop.createdAt = category.updatedAt = new Date();
+      laptop.createdAt = laptop.updatedAt = new Date();
     });
 
     await queryInterface.bulkInsert("Laptops", laptops, {});

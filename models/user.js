@@ -11,6 +11,7 @@ module.exports = (sequelize, DataTypes) => {
     {
       fullName: {
         type: DataTypes.STRING,
+        allowNull: false,
         validate: {
           notNull: {
             msg: "Full Name Required",

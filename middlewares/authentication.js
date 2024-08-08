@@ -14,6 +14,8 @@ async function authentication(req, res, next) {
 
     if (!user) throw { name: "Unauthorized" };
 
+    if (user.role === "buyer") throw { name: "Forbidden" };
+
     req.logInfo = {
       userId: user.id,
       email: user.email,
