@@ -1,6 +1,6 @@
 const { Laptop, User } = require("../models");
 const { Op } = require("sequelize");
-const { GoogleGenerativeAI } = require("@google/generative-ai");
+const cloudinary = require("../utils/cloudinary");
 
 class LaptopController {
   static async read(req, res, next) {
@@ -178,20 +178,48 @@ class LaptopController {
     }
   }
 
-  static async askAi(req, res, next) {
+  static async patchImgUrl(req, res, next) {
     try {
-      const gemini = new GoogleGenerativeAI(process.env.GEMINI_KEY);
-      const model = gemini.getGenerativeModel({ model: "gemini-1.5-flash" });
-      const prompt =
-        "Please give me only a name for today's popular pokemon without bolding the text";
+      const { id } = req.params;
+      const laptop = await Laptop.findByPk(id);
 
-      const result = await model.generateContent(prompt);
-      const response = await result.response;
-      const text = response.text();
-      console.log(text);
-      res.status(200).json(text);
+      if (!laptop) {
+        throw { name: "NotFound", id };
+      }
+      //hapus
+      //req.file ditambahkan oleh multer
+
+      // const file = req.file.buffer.toString("base64");
+      // const fileName = req.file.originalname;
+      // const { url } = await imagekit.upload({
+      //   file,
+      //   fileName,
+      // });
+
+      const uploadResult = await cloudinary.uploader.upload(
+        "https://res.cloudinary.com/demo/image/upload/getting-started/shoes.jpg",
+        {
+          public_id: "shoes",
+        }
+      );
+
+      console.log(uploadResult);
+
+      // await Laptop.update(
+      //   { imgUrl: url },
+      //   {
+      //     where: {
+      //       id,
+      //     },
+      //   }
+      // );
+
+      res.status(200).json({
+        message: `Success Update Products with id ${id}`,
+      });
     } catch (error) {
       console.log(error);
+      next(error);
     }
   }
 }

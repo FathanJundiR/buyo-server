@@ -6,11 +6,12 @@ const errorHandler = require("../middlewares/errorHandler");
 const AuthController = require("../controllers/authController");
 const LaptopController = require("../controllers/laptopController");
 const laptopRouter = require("./laptop");
+const AiController = require("../controllers/aiController");
 
 router.post("/register", AuthController.addBuyer);
 router.post("/login", AuthController.login);
 router.post("/google-login", AuthController.googleLogin);
-router.get("/ask-ai", LaptopController.askAi);
+router.post("/ask-ai", AiController.askAi);
 router.post("/cms/login", AuthController.cmsLogin);
 router.get("/pub/laptops", LaptopController.read);
 router.get("/pub/laptops/:id", LaptopController.readById);
